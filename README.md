@@ -1,7 +1,7 @@
 Bench Them All!
 ===============
 
-This repo aims to add a collection of scripts written in various languages written to benchmark performance of various server platforms from a single client.
+This repo aims to add a collection of scripts written in various languages (presently only php) written to benchmark performance of various server platforms from a single client.
 
 Each script gauges performance based on the following three values:
 

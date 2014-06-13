@@ -1,7 +1,7 @@
 Bench Them All!
 ===============
 
-This repo aims to add a collection of scripts written in various languages (presently only php) written to benchmark performance of various server platforms from a single client.
+This repo aims to add a collection of scripts written in various languages (presently only **php**) to benchmark performance of a server platform from a single or central client location.
 
 Each script gauges performance based on the following three values:
 
@@ -11,7 +11,7 @@ Each script gauges performance based on the following three values:
 
 Besides, the client can make the requests several times even concurrently so that it can gauge the network speed a.k.a requests/sec. Each script sends back a response in json format containing the performance parameters  plus some additional info like this:
 
-{"type":"disk","iterations":500,"generate_time":552,"write_time":1654,"read_time":45,"server_software":"Apache\/2.4.7 (Ubuntu)","payload":"payload"}
+{"type":"disk","iterations":500,"generate_time":552,"write_time":1654,"read_time":45,"server_software":"Apache\/2.4.7 (Ubuntu)","payload":"xxxxxyyyzzz..."}
 
 The ***iterations*** parameter refers to the number of times each benchmarking operation was performed. The default is 500, but can be changed in the script.
 
@@ -22,6 +22,6 @@ The ***write_time*** refers to:
 2. In case of mysql, milliseconds to insert a payload record to a table for 500 times.
 3. In case of sqlite, milliseconds to insert a payload record to a table for 500 times.
 
-The ***payload*** is a randomly generated 108kb string generated for gauging the performance.
+The ***payload*** is a 108 kilobyte string generated randomly for gauging the performance.
 
 Based on the return value from the scripts, the client can easily gauge not only the network speed between the client and the remote server, but also the server's efficiency for performing I/O.

@@ -4,16 +4,12 @@
  * @description: script used to benchmark php setup
  * @author: Prahlad Yeri
  * @copyright: MIT Licensed
- * @version: 1.02
- * 
+ * @version: 1.0.14
  * */
 
-$mysqlserver = 'localhost';
-$mysqlusername = 'test';
-$mysqlpassword='test';
-$mysqldatabase='test';
+require_once('config.php');
 
-$iterations=500;
+$script_version='1.0.14'
 $payload=""; //generate a random string of 108KB and a random filename
 $fname='';
 $rtime=0; //in milliseconds
@@ -38,7 +34,17 @@ $gentime=round((microtime(true) - $start)*1000);
 
 //write test:
 $start = microtime(true);
-	if ($type=='sqlite') //sqlite test
+	if ($type=='sqlite2') //sqlite test
+	{
+		$db = sqlite_open('benchmark.db',0666);
+		sqlite_query($db, 'create table temp(t text)');
+		sqlite_query($db, "begin");
+		for($i=0;$i<$iterations;$i++) {
+			sqlite_exec($db, "insert into temp values('{$payload}')");
+			};
+		sqlite_query($db, "commit");
+	}
+	else if ($type=='sqlite3') //sqlite3 test
 	{
 		$db = new SQLite3("benchmark.db");
 		$db->exec('create table temp(t text)');
@@ -50,7 +56,6 @@ $start = microtime(true);
 			//$db->exec("delete from temp");
 			};
 		$db->exec("commit");
-		
 	}
 	else if ($type=='mysql') //mysql test
 	{
@@ -71,13 +76,20 @@ $wtime=round((microtime(true) - $start)*1000);
 //read test:
 $start = microtime(true);
 $result = '';
-if ($type=='sqlite'){
+if ($type=='sqlite2'){
+	for($i=0;$i<$iterations;$i++) {
+		$query = sqlite_query($db,"select t from temp limit 1");
+		$result = sqlite_fetch_array($query);
+		//$result = $result->fetchArray();
+		$result = $result['t'];
+	};
+}
+else if ($type=='sqlite3'){
 	for($i=0;$i<$iterations;$i++) {
 		$result = $db->query("select t from temp limit 1");
-		$result = $result->fetchArray()['t'];
-		//$db->exec("delete from temp");
+		$result = $result->fetchArray();
+		$result = $result['t'];
 	};
-		//var_dump($result);
 }
 else if ($type=='mysql'){
 	$stmt = $mysqli->prepare('select t from temp limit 1');
@@ -97,7 +109,13 @@ else
 $rtime=round((microtime(true) - $start)*1000);
 
 //cleanup:	
-if ($type=='sqlite') 
+if ($type=='sqlite2') 
+{
+		sqlite_query($db, "drop table temp");
+		//$db->close();
+		sqlite_close($db);
+}
+else if ($type=='sqlite3') 
 {
 		$db->exec("drop table temp");
 		$db->close();
@@ -119,6 +137,7 @@ $result =  array(
 	'write_time'=>$wtime,
 	'read_time'=>$rtime,
 	'server_software'=>$_SERVER["SERVER_SOFTWARE"],
+	'php_version'=>phpversion(),
 	'payload'=>$result,
 );
 

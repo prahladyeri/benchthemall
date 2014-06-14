@@ -4,12 +4,13 @@
  * @description: script used to benchmark php setup
  * @author: Prahlad Yeri
  * @copyright: MIT Licensed
- * @version: 1.0.14
+ * @version: 1.0.57
  * */
+$version="1.0.57";
 
 require_once('config.php');
 
-$script_version='1.0.14'
+$script_version='1.0.14';
 $payload=""; //generate a random string of 108KB and a random filename
 $fname='';
 $rtime=0; //in milliseconds
@@ -26,8 +27,9 @@ if (isset($_REQUEST['type'])) $type=$_REQUEST['type'];
 $start = microtime(true);
 for($i=0;$i<108000;$i++) //generate a big string
 {
-	$n=rand(0,57)+65;
-	$payload = $payload.chr($n);
+	//$n=rand(0,57)+65; //A-z
+	$n=rand(0,15)+97; //a-z
+	$payload = $payload.chr	($n);
 }
 $gentime=round((microtime(true) - $start)*1000);
 
@@ -62,9 +64,11 @@ $start = microtime(true);
 		$mysqli = new mysqli($mysqlserver, $mysqlusername, $mysqlpassword, $mysqldatabase);
 		$mysqli->query('create table temp(t varchar(108000))');
 		$mysqli->query('begin transaction');
+		//die("created table and begun trans!");
 		for($i=0;$i<$iterations;$i++) 
 			$mysqli->query("insert into temp values('{$payload}')");
 		$mysqli->query('commit');
+		//die("committed!");
 	}
 	else // Disk I/O
 	{
@@ -95,11 +99,13 @@ else if ($type=='mysql'){
 	$stmt = $mysqli->prepare('select t from temp limit 1');
 	if ($stmt) 
 	{
+		//die("prepared successfully! now looping");
 		for($i=0;$i<$iterations;$i++) {
 			$stmt->execute();
 			$stmt->bind_result($result);
 			$stmt->fetch();
 		};
+		$stmt->close();
 	}
 }
 else
@@ -122,7 +128,11 @@ else if ($type=='sqlite3')
 }
 else if ($type=='mysql') 
 {
-	$mysqli->query('drop table temp');
+	//$mysqli->query('begin');
+	if (!$mysqli->query('drop table temp;')) echo 'drop failed';
+	//$mysqli->query('commit');
+	$mysqli->close();
+		//die("cleaned up!");
 }
 else 
 {
@@ -131,14 +141,27 @@ else
 
 //return:
 $result =  array(
+	'script_version'=>$script_version,
 	'type'=>($type==''?'disk':$type),
 	'iterations'=>$iterations,
 	'generate_time'=>$gentime,
 	'write_time'=>$wtime,
 	'read_time'=>$rtime,
+	'HTTP_HOST'=>$_SERVER["HTTP_HOST"],
 	'server_software'=>$_SERVER["SERVER_SOFTWARE"],
 	'php_version'=>phpversion(),
+	'mysql_host'=>$mysqlserver,
 	'payload'=>$result,
 );
 
+
+/*$result =  array(
+	'payload'=>$result,
+);*/
+
+
+		//die("result prepared!");
+
 echo json_encode($result);
+//echo gettype($result);
+

@@ -1,0 +1,77 @@
+/*@import url("http://fonts.googleapis.com/css?family=Kameron|Graduate");*/
+/*@import url("http://fonts.googleapis.com/css?family=Michroma");*/
+@font-face {
+  font-family: 'Michroma';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Michroma'), url(/fonts/michroma.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Graduate';
+  font-style: normal;
+  font-weight: 400;
+  src: local(Graduate), 
+  local('Graduate-Regular'), 
+  url(/fonts/graduate.woff) format('woff'); 
+}
+
+/*@font-face {
+  font-family: 'Kameron';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Kameron'), url(/fonts/cameron.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Droid Sans'), local('DroidSans'), url(/fonts/droid-sans.woff) format('woff');
+}*/
+
+
+h1, h2, h3,  div  {
+    font-family: Graduate;
+		text-align: center;
+	}
+
+body, .ui-widget
+{
+	font-family: Michroma;
+}
+
+body
+{
+	text-align: center;
+	margin: 0 200px 0 200px;
+}
+
+/*td{font-weight: bold;}
+table.ui-widget{font-size: 12px;}
+table.ui-widget a {
+    height:20px; align:top;
+}
+*/
+table {
+font-family: arial;
+	width: 100%;
+}
+
+td, th {
+    border: 1px solid;
+
+}
+
+table caption{
+font-size: 11px;
+}
+
+
+/*.styleTable { border-collapse: separate; }
+.styleTable TD { font-weight: normal !important; padding: .4em; border-top-width: 0px !important; }
+.styleTable TH { text-align: center; padding: .8em .4em; }
+.styleTable TD.first, .styleTable TH.first { border-left-width: 0px !important; }*/
+
+img.header{
+}

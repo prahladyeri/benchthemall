@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<title>Host Metric</title>
+
+<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/sunny/jquery-ui.min.css">
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>-->
+
+<link rel="stylesheet" href="css/themes/humanity/jquery-ui.min.css">
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/ajax.css">
+
+ <script>
+$(function() {
+$( "input[type=submit], a, button" )
+.button()
+.click(function( event ) {
+event.preventDefault();
+});
+});
+</script>
+</head>
+<body>
+<h2>Host metric</h2>
+<p>Host metric is an online app to benchmark your chosen free-tier web hosting provider in REAL TIME!</p>
+	<!--<img style="width:50px" src="https://developers.google.com/cloud/images/appengine-icon-54x48.png">
+	<img style="width:100px" src="https://upload.wikimedia.org/wikipedia/en/3/3a/OpenShift-LogoType.svg">
+	<img src="http://byethost.com/templates/ja_erica/images/logo.png">-->
+	<img style="width:50px" src="img/gae-logo.png">
+	<img style="width:100px" src="img/openshift-logo.svg">
+	<img src="img/byet-logo-min.png">
+<p/>
+<button onclick="ajaxDoTest();">Perform Test</button>
+<!--<input type="submit" value="A submit button"><p/>-->
+<!--<a href="#">An anchor</a>-->
+<!--<table class="jtable">-->
+<table id="results"> <!-- class="ui-widget" -->
+     <caption style="text-align:left">Last Tests performed</caption>
+<thead> <!--class="ui-widget-header">-->
+<tr>
+    <th>Time.</th>
+    <th>Provider</th>
+    <th>Language</th>
+    <th>Platform</th>
+    <th>Req/sec</th>
+    <th>Results</th>
+</tr>
+</thead>
+<tbody> <!-- class="ui-widget-content">-->
+</tbody>
+</table>
+<button onclick="    addNewRow({
+        'time':'10:00:00',
+        'provider':'Google',
+        'language':'php 5.3',
+        'platform':'nginx',
+        'req_per_sec':'1.56',
+        
+        });">Add</button>
+
+<script src="js/app.js"></script>
+
+<div class="modal"><!-- Place at bottom of page --></div>
+
+</body>
+</html>

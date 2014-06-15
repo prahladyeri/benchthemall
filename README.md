@@ -1,7 +1,7 @@
 Bench Them All!
 ===============
 
-This repo aims to add a collection of scripts written in various languages (presently only **php**) to benchmark performance of a server platform from a single or central client location.
+This repo aims to add a collection of scripts written in various languages (presently only **php**) to benchmark performance of a server platform from a single or central client location. The Live implementation of this site is hosted on <a href="http://hostmetric.appspot.com/">Appspot</a>.
 
 Each script gauges performance based on the following factors:
 

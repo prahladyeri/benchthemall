@@ -21,31 +21,71 @@
   font-style: normal;
   font-weight: 400;
   src: local('Kameron'), url(/fonts/cameron.woff) format('woff');
-}
+}*/
 
 @font-face {
   font-family: 'Droid Sans';
   font-style: normal;
   font-weight: 400;
   src: local('Droid Sans'), local('DroidSans'), url(/fonts/droid-sans.woff) format('woff');
-}*/
+}
 
 
-h1, h2, h3,  div  {
+/*h1, h2, h3,  div*/  
+.heading {
     font-family: Graduate;
 		text-align: center;
 	}
+    
+a span {background-color: darkblue;}
 
-body, .ui-widget
+.title
 {
 	font-family: Michroma;
+}
+
+body, table, .footer, .footer .info, .ui-widget
+{
+    font-family: Droid Sans;
 }
 
 body
 {
 	text-align: center;
-	margin: 0 200px 0 200px;
+    /*width: 100%;*/
+	margin: 0 120px 0 120px;
+    /*padding-left: 120px;
+    padding-right: 120px;*/
 }
+
+.footer
+{
+    position: relative;
+    /*bottom: 0px;*/
+    left: 0px;
+    width: 100%;
+    text-align: center;
+    vertical-align: bottom;
+    font-size: 11px;
+    /*border: 1px solid;*/
+}
+
+.footer .info
+{
+    /*position: absolute; */
+    position: relative;
+    margin-top: 240px;
+    /*border: 1px solid;  */
+    bottom: 5px; vertical-align: bottom; text-align: center;
+    /*width: 100px; */
+}
+
+/*.footer div{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    bottom: 0px;
+}*/
 
 /*td{font-weight: bold;}
 table.ui-widget{font-size: 12px;}
@@ -54,7 +94,6 @@ table.ui-widget a {
 }
 */
 table {
-font-family: arial;
 	width: 100%;
 }
 

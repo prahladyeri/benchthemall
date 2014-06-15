@@ -25,3 +25,6 @@ libraries:
   version: latest
 - name: jinja2
   version: latest
+
+inbound_services:
+- mail
